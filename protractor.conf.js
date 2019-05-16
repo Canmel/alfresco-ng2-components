@@ -212,7 +212,6 @@ exports.config = {
     baseUrl: HOST,
 
     params: {
-<<<<<<< HEAD
         config: appConfig,
         identityAdmin: {
             email: IDENTITY_ADMIN_EMAIL,
@@ -221,13 +220,6 @@ exports.config = {
         identityUser: {
             email: USERNAME_ADF,
             password: PASSWORD_ADF
-=======
-        rootPath: __dirname,
-        config: {
-            oauth2: {
-                clientId: 'activiti'
-            }
->>>>>>> testing changes
         }
     },
 
