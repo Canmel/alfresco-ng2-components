@@ -127,7 +127,7 @@ describe('StartTaskCloudComponent', () => {
             expect(successSpy).not.toHaveBeenCalled();
         });
 
-        it('should assign task to the logged in user when invalid assignee is selected', async(() => {
+        it('should not start task to the logged in user when invalid assignee is selected', (done) => {
             component.taskForm.controls['name'].setValue('fakeName');
             component.appName = 'fakeAppName';
             fixture.detectChanges();
@@ -139,11 +139,12 @@ describe('StartTaskCloudComponent', () => {
             fixture.detectChanges();
             fixture.whenStable().then(() => {
                 const taskRequest = new StartTaskCloudRequestModel({ name: 'fakeName', assignee: 'currentUser', candidateGroups: []});
-                expect(createNewTaskSpy).toHaveBeenCalledWith(taskRequest, 'fakeAppName');
+                expect(createNewTaskSpy).not.toHaveBeenCalledWith(taskRequest, 'fakeAppName');
+                done();
             });
-        }));
+        });
 
-        it('should assign task to the logged in user when assignee is not selected', async(() => {
+        it('should not complete task to the logged in user when assignee is not selected', (done) => {
             component.taskForm.controls['name'].setValue('fakeName');
             component.appName = 'fakeAppName';
             fixture.detectChanges();
@@ -152,9 +153,10 @@ describe('StartTaskCloudComponent', () => {
             fixture.detectChanges();
             fixture.whenStable().then(() => {
                 const taskRequest = new StartTaskCloudRequestModel({ name: 'fakeName', assignee: 'currentUser', candidateGroups: []});
-                expect(createNewTaskSpy).toHaveBeenCalledWith(taskRequest, 'fakeAppName');
+                expect(createNewTaskSpy).not.toHaveBeenCalledWith(taskRequest, 'fakeAppName');
+                done();
             });
-        }));
+        });
 
         it('should cannot start a task if assigne or candidate group is invalid', async(() => {
             component.taskForm.controls['name'].setValue('fakeName');
@@ -210,9 +212,14 @@ describe('StartTaskCloudComponent', () => {
         component.taskForm.controls['name'].setValue('fakeName');
         const errorSpy = spyOn(component.error, 'emit');
         createNewTaskSpy.and.returnValue(throwError({}));
-        const createTaskButton = <HTMLElement> element.querySelector('#button-start');
+        component.appName = 'fakeAppName';
         fixture.detectChanges();
+        const assigneeInput = <HTMLElement> element.querySelector('input.adf-cloud-input');
+        assigneeInput.nodeValue = 'a';
+        fixture.detectChanges();
+        const createTaskButton = <HTMLElement> element.querySelector('#button-start');
         createTaskButton.click();
+        fixture.detectChanges();
         expect(errorSpy).toHaveBeenCalled();
     });
 
