@@ -39,7 +39,7 @@ export class TasksService {
             return await this.api.performBpmOperation(path, method, queryParams, postBody);
         } catch (error) {
             // tslint:disable-next-line:no-console
-            console.log('Task Service error');
+            console.log('Task Service error when creating standalone task');
         }
     }
 
@@ -53,7 +53,7 @@ export class TasksService {
             return await this.api.performBpmOperation(path, method, queryParams, postBody);
         } catch (error) {
             // tslint:disable-next-line:no-console
-            console.log('Task Service error');
+            console.log('Task Service error when completing a task');
         }
 
     }
@@ -68,7 +68,7 @@ export class TasksService {
             return await this.api.performBpmOperation(path, method, queryParams, postBody);
         } catch (error) {
             // tslint:disable-next-line:no-console
-            console.log('claim Task Service error');
+            console.log('Task Service error when claiming a task');
         }
     }
 
@@ -82,7 +82,7 @@ export class TasksService {
             return await this.api.performBpmOperation(path, method, queryParams, postBody);
         } catch (error) {
             // tslint:disable-next-line:no-console
-            console.log('delete task Service error');
+            console.log('Task Service error when deleting a task');
         }
     }
 
@@ -109,7 +109,7 @@ export class TasksService {
             return await this.api.performBpmOperation(path, method, queryParams, postBody);
         } catch (error) {
             // tslint:disable-next-line:no-console
-            console.log('get Task Service error');
+            console.log('Task Service error when geting a task');
         }
     }
 
@@ -124,7 +124,7 @@ export class TasksService {
             return data.list.entries && data.list.entries.length > 0 ? data.list.entries[0].entry.id : null;
         } catch (error) {
             // tslint:disable-next-line:no-console
-            console.log('get Task Service error');
+            console.log('Task Service error');
         }
     }
 
@@ -139,7 +139,7 @@ export class TasksService {
             return await this.api.performBpmOperation(path, method, queryParams, postBody);
         } catch (error) {
             // tslint:disable-next-line:no-console
-            console.log('create Task Service error');
+            console.log('Task Service error when creating a subtask');
         }
     }
 
