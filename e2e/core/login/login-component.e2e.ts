@@ -217,7 +217,7 @@ describe('Login component', () => {
         loginPage.clickSettingsIcon();
         settingsPage.setProviderEcmBpm();
         loginPage.login(adminUserModel.id, adminUserModel.password);
-        loginPage.removeECMTicketFromStorage();
+        browser.executeScript('window.localStorage.removeItem("ticket-ECM");');
         BrowserActions.getUrl(TestConfig.adf.url + '/files');
         loginPage.waitForElements();
     });
